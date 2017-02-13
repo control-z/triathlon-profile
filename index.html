@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta name="viewport" charset="utf-8" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/9.7.2/css/bootstrap-slider.min.css"/>
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/> -->
+    <link rel="stylesheet" href="https://bootswatch.com/united/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://bootswatch.com/assets/css/custom.min.css"/>
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"/> -->
+    <style>
+    .tooltip {
+      pointer-events: none;
+      -webkit-touch-callout: none; /* iOS Safari */
+        -webkit-user-select: none; /* Safari */
+         -khtml-user-select: none; /* Konqueror HTML */
+           -moz-user-select: none; /* Firefox */
+            -ms-user-select: none; /* Internet Explorer/Edge */
+                user-select: none; /* Non-prefixed version, currently supported by Chrome and Opera */
+    }
+    .slider-selection {
+      background: #BABABA;
+    }
+    .slider-handle {
+      background: #c34113
+    }
+    </style>
+    <title>Triathlon Profile</title>
+  </head>
+
+  <body>
+
+    <div class="navbar navbar-default navbar-fixed-top">
+       <div class="container">
+         <div class="navbar-header">
+           <span class="navbar-brand">TriProfile</span>
+           <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-main">
+             <span class="icon-bar"></span>
+             <span class="icon-bar"></span>
+             <span class="icon-bar"></span>
+           </button>
+         </div>
+         <!--
+         <div class="navbar-collapse collapse" id="navbar-main">
+           <ul class="nav navbar-nav">
+             <li class="dropdown">
+               <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="themes">Themes <span class="caret"></span></a>
+               <ul class="dropdown-menu" aria-labelledby="themes">
+                 <li><a href="../default/">Default</a></li>
+                 <li class="divider"></li>
+                 <li><a href="../cerulean/">Cerulean</a></li>
+                 <li><a href="../cosmo/">Cosmo</a></li>
+                 <li><a href="../cyborg/">Cyborg</a></li>
+                 <li><a href="../darkly/">Darkly</a></li>
+                 <li><a href="../flatly/">Flatly</a></li>
+                 <li><a href="../journal/">Journal</a></li>
+                 <li><a href="../lumen/">Lumen</a></li>
+                 <li><a href="../paper/">Paper</a></li>
+                 <li><a href="../readable/">Readable</a></li>
+                 <li><a href="../sandstone/">Sandstone</a></li>
+                 <li><a href="../simplex/">Simplex</a></li>
+                 <li><a href="../slate/">Slate</a></li>
+                 <li><a href="../spacelab/">Spacelab</a></li>
+                 <li><a href="../superhero/">Superhero</a></li>
+                 <li><a href="../united/">United</a></li>
+                 <li><a href="../yeti/">Yeti</a></li>
+               </ul>
+             </li>
+             <li>
+               <a href="../help/">Help</a>
+             </li>
+             <li>
+               <a href="http://news.bootswatch.com">Blog</a>
+             </li>
+             <li class="dropdown">
+               <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="download">United <span class="caret"></span></a>
+               <ul class="dropdown-menu" aria-labelledby="download">
+                 <li><a href="http://jsfiddle.net/bootswatch/cvLkpsx0/">Open Sandbox</a></li>
+                 <li class="divider"></li>
+                 <li><a href="./bootstrap.min.css">bootstrap.min.css</a></li>
+                 <li><a href="./bootstrap.css">bootstrap.css</a></li>
+                 <li class="divider"></li>
+                 <li><a href="./variables.less">variables.less</a></li>
+                 <li><a href="./bootswatch.less">bootswatch.less</a></li>
+                 <li class="divider"></li>
+                 <li><a href="./_variables.scss">_variables.scss</a></li>
+                 <li><a href="./_bootswatch.scss">_bootswatch.scss</a></li>
+               </ul>
+             </li>
+           </ul>
+
+           <ul class="nav navbar-nav navbar-right">
+             <li><a href="http://builtwithbootstrap.com/" target="_blank">Built With Bootstrap</a></li>
+             <li><a href="https://wrapbootstrap.com/?ref=bsw" target="_blank">WrapBootstrap</a></li>
+           </ul>
+
+         </div>
+       -->
+       </div>
+     </div>
+
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-6 col-sm-12">
+          <canvas id="myChart" width="400" height="400"></canvas>
+        </div>
+        <div class="col-md-6 col-sm-12">
+          <p>&nbsp;</p>
+          <table class="table" border="0">
+            <tr><td>Technology</td><td><input id="slider1"></input></td></tr>
+            <tr><td>Swim</td><td><input id="slider2"></input></td></tr>
+            <tr><td>Bike</td><td><input id="slider3"></input></td></tr>
+            <tr><td>Run</td><td><input id="slider4"></input></td></tr>
+            <tr><td>Transition</td><td><input id="slider5"></input></td></tr>
+            <tr><td>S&amp;C</td><td><input id="slider6"></input></td></tr>
+            <tr><td>Injuries</td><td><input id="slider7"></input></td></tr>
+            <tr><td>Psychology</td><td><input id="slider8"></input></td></tr>
+            <tr><td>Lifestyle</td><td><input id="slider9"></input></td></tr>
+            <tr><td>Commitment</td><td><input id="slider10"></input></td></tr>
+            <tr><td>Nutrition</td><td><input id="slider11"></input></td></tr>
+            <tr><td>Physiology</td><td><input id="slider12"></input></td></tr>
+          </table>
+          <p id="message"></p>
+          <button class="btn btn-primary" id="save">Save</button>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.bundle.js"></script>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/9.7.2/bootstrap-slider.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <script>
+    $(function() {
+      var performance = [];
+      var sliders = [12];
+
+      // draw empty chart
+      var chart = new Chart(document.getElementById("myChart"), {
+        type: 'radar',
+        options: {
+          pointDot : true,
+          responsive: true,
+          legend: {
+            display: false
+          },
+          scale: {
+            pointLabels: {
+              fontFamily: "'Ubuntu',Tahoma,'Helvetica Neue',Helvetica,Arial,sans-serif",
+              fontSize: 14
+            },
+            ticks: {
+                max: 10,
+                min: 0,
+                stepSize: 2
+            }
+          }
+        },
+        data: {
+          labels: ["Technology", "Swim", "Bike", "Run", "Transition", "S&C", "Injuries", "Psychology", "Lifestyle", "Commitment", "Nutrition", "Physiology"],
+          datasets: [{
+            data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            backgroundColor: "rgba(255,50,50,0.2)",
+            borderColor: "rgba(179,181,198,1)",
+            pointBackgroundColor: "rgba(179,181,198,1)",
+            pointBorderColor: "#fff",
+            pointHoverBackgroundColor: "#fff",
+            pointHoverBorderColor: "rgba(179,181,198,1)"
+          }]
+        }
+      });
+
+      // draw empty sliders
+      for(let i = 0; i < 12; i++) {
+        sliders[i] = $("#slider"+(i+1)).slider({
+          max:10,
+          value:0,
+          formatter: function(v) {
+            return chart.data.labels[i] + ': ' + v;
+          }
+        });
+        sliders[i].on('change', function(event) { chartval(i, event.value.newValue); });
+      }
+
+      // if url has hash component, use it to load data
+      var hash = window.location.hash ? window.location.hash.replace('#','/') : '';
+      var action = 'POST';
+      if(hash) {
+        action = 'PUT';
+        $.ajax({
+          url:"https://api.myjson.com/bins"+hash,
+          type:"GET",
+          success: function(data, textStatus, jqXHR){
+            performance = data;
+            populate();
+          }
+        });
+      }
+
+      // function to populate radar chart & sliders
+      var populate = function() {
+        if(performance.length > 0 && performance[performance.length-1].length > 0) {
+          var dataset = performance[performance.length-1];
+          for(var i = 0; i < dataset.length; i++) {
+            chart.data.datasets[0].data[i] = dataset[i];
+            sliders[i].slider('setValue',dataset[i]);
+            sliders[i].slider('relayout');
+          }
+          chart.update();
+        }
+      };
+
+      // function to set a particular chart value
+      var chartval = function(indexToUpdate, val) {
+        chart.data.datasets[0].data[indexToUpdate] = val;
+        chart.update();
+      };
+
+      $('#message').hide();
+
+      // function to save current data
+      $('#save').on('click',function(event) {
+        performance.push(chart.data.datasets[0].data);
+        $('#save').prop('disabled', true);
+        $('#message').hide();
+        $.ajax({
+          url:         "https://api.myjson.com/bins"+hash,
+          type:        action,
+          data:         JSON.stringify(performance),
+          contentType: "application/json; charset=utf-8",
+          dataType:    "json"
+        }).done(function(data, textStatus, jqXHR) {
+          if(data.uri) {
+            var key = data.uri.match(/\/bins\/(.*)/)[1];
+            window.location.hash = key;
+            hash = '/'+key;
+            $('#message').html('Saved. Bookmark this page. Your data is here: <a target="_blank" href="https://api.myjson.com' + hash + '">https://api.myjson' + hash + '</a>');
+          } else {
+            $('#message').html('Saved. <a target="_blank" href="https://api.myjson.com' + hash + '">https://api.myjson' + hash + '</a>');
+          }
+          $('#message').removeClass('text-danger');
+          $('#message').addClass('text-success');
+          $('#message').fadeIn();
+        }).fail(function(jqXHR, textStatus, error) {
+          $('#message').removeClass('text-success');
+          $('#message').addClass('text-danger');
+          $('#message').html('Error. Failed to save data. Please try again.');
+          $('#message').show();
+        });
+        $('#save').prop('disabled', false);
+      });
+    });
+  </script>
+
+  </body>
+</html>
