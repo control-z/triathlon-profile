@@ -25,6 +25,9 @@
     .slider-handle {
       background: #c34113
     }
+    .tridate {
+      color: blue;
+    }
     </style>
     <title>Triathlon Profile</title>
   </head>
@@ -84,6 +87,7 @@
                  <li><a href="./variables.less">variables.less</a></li>
                  <li><a href="./bootswatch.less">bootswatch.less</a></li>
                  <li class="divider"></li>
+                 <li><a href="./_varstopes.scss">_variables.scss</a><Stop
                  <li><a href="./_variables.scss">_variables.scss</a></li>
                  <li><a href="./_bootswatch.scss">_bootswatch.scss</a></li>
                </ul>
@@ -103,10 +107,32 @@
     <div class="container-fluid">
       <div class="row">
         <div class="col-md-6 col-sm-12">
+          <br/>
+          <table border="0" cellpadding="0" cellspacing="0" width="100%">
+            <tr>
+              <td>
+                Date: <span class="tridate" id="tridate"></span>
+                <div id="progress" class="progress" style="height: 10px">
+                  <div id="bar" class="progress-bar progress-bar-warning" role="progressbar" style="width: 0%; height: 10px"/>
+                </div>
+              </td>
+              <td align="right">
+                <button id="play" type="button" class="btn btn-default btn-sm" style="display: none">
+                  <span class="glyphicon glyphicon-play" aria-hidden="true"></span> Play
+                </button>
+                <button id="stop" type="button" class="btn btn-danger btn-sm" style="display: none">
+                  <span class="glyphicon glyphicon-stop" aria-hidden="true"></span> Stop
+                </button>
+              </td>
+            </tr>
+          </table>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6 col-sm-12">
           <canvas id="myChart" width="400" height="400"></canvas>
         </div>
         <div class="col-md-6 col-sm-12">
-          <p>&nbsp;</p>
           <table class="table" border="0">
             <tr><td>Technology</td><td><input id="slider1"></input></td></tr>
             <tr><td>Swim</td><td><input id="slider2"></input></td></tr>
@@ -121,8 +147,10 @@
             <tr><td>Nutrition</td><td><input id="slider11"></input></td></tr>
             <tr><td>Physiology</td><td><input id="slider12"></input></td></tr>
           </table>
-          <p id="message"></p>
+          <p id="spinner" style="display: none"><img border="0" src="loading.gif"/></p>
+          <p id="message" style="display: none"></p>
           <button class="btn btn-primary" id="save">Save</button>
+          <p>&nbsp;</p>
         </div>
       </div>
     </div>
@@ -132,6 +160,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/9.7.2/bootstrap-slider.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="moment-2.17.1.js"></script>
 
     <script>
     $(function() {
@@ -147,6 +176,7 @@
           legend: {
             display: false
           },
+          aspectRatio: 1,
           scale: {
             pointLabels: {
               fontFamily: "'Ubuntu',Tahoma,'Helvetica Neue',Helvetica,Arial,sans-serif",
@@ -188,6 +218,7 @@
       // if url has hash component, use it to load data
       var hash = window.location.hash ? window.location.hash.replace('#','/') : '';
       var action = 'POST';
+      $('#tridate').text(moment().format('MMMM Do YYYY'));
       if(hash) {
         action = 'PUT';
         $.ajax({
@@ -195,15 +226,21 @@
           type:"GET",
           success: function(data, textStatus, jqXHR){
             performance = data;
-            populate();
+            if(performance.length > 0) {
+              populate(performance.length-1);
+            }
+            if(performance.length > 1) {
+              $('#play').show();
+            }
           }
         });
       }
 
       // function to populate radar chart & sliders
-      var populate = function() {
-        if(performance.length > 0 && performance[performance.length-1].length > 0) {
-          var dataset = performance[performance.length-1];
+      var populate = function(item) {
+        if(performance.length > 0 && performance[item].data) {
+          $('#tridate').text(performance[item].date);
+          var dataset = performance[item].data;
           for(var i = 0; i < dataset.length; i++) {
             chart.data.datasets[0].data[i] = dataset[i];
             sliders[i].slider('setValue',dataset[i]);
@@ -213,19 +250,51 @@
         }
       };
 
+      // function to show dataset
+      var wayback = function(item) {
+        $('#bar').css('width',~~(((item+1) / performance.length) * 100) + '%');
+        populate(item);
+        if(item < (performance.length-1)) {
+          setTimeout(function() { wayback(item+1) }, 1000)
+        } else {
+          setTimeout(function() {
+            $('#play').show();
+            $('#stop').hide();
+          }, 1000);
+        }
+      };
+
       // function to set a particular chart value
       var chartval = function(indexToUpdate, val) {
         chart.data.datasets[0].data[indexToUpdate] = val;
         chart.update();
       };
 
-      $('#message').hide();
+      // function to play history
+      $('#play').on('click',function(event) {
+        $('#play').hide();
+        $('#stop').show();
+        wayback(0);
+      });
+
+      // function to stop history
+      $('#stop').on('click',function(event) {
+        $('#bar').css('width','0%');
+        $('#stop').hide();
+        $('#play').show();
+        // TODO: clear timeout
+        populate(performance.length-1);
+      });
 
       // function to save current data
       $('#save').on('click',function(event) {
-        performance.push(chart.data.datasets[0].data);
+        performance.push({
+          date: moment().format('MMMM Do YYYY'),
+          data: chart.data.datasets[0].data
+        });
         $('#save').prop('disabled', true);
         $('#message').hide();
+        $('#spinner').show().delay(2000);
         $.ajax({
           url:         "https://api.myjson.com/bins"+hash,
           type:        action,
@@ -237,17 +306,27 @@
             var key = data.uri.match(/\/bins\/(.*)/)[1];
             window.location.hash = key;
             hash = '/'+key;
+            action = 'PUT';
             $('#message').html('Saved. Bookmark this page. Your data is here: <a target="_blank" href="https://api.myjson.com' + hash + '">https://api.myjson' + hash + '</a>');
           } else {
             $('#message').html('Saved. <a target="_blank" href="https://api.myjson.com' + hash + '">https://api.myjson' + hash + '</a>');
           }
           $('#message').removeClass('text-danger');
           $('#message').addClass('text-success');
+          if(performance.length > 0) {
+            populate(performance.length-1);
+          }
+          if(performance.length > 1) {
+            $('#play').show();
+          }
+          $('#spinner').hide();
           $('#message').fadeIn();
         }).fail(function(jqXHR, textStatus, error) {
+          performance.pop();
           $('#message').removeClass('text-success');
           $('#message').addClass('text-danger');
           $('#message').html('Error. Failed to save data. Please try again.');
+          $('#spinner').hide();
           $('#message').show();
         });
         $('#save').prop('disabled', false);
