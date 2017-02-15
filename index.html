@@ -104,7 +104,7 @@
        </div>
      </div>
 
-    <div class="container-fluid">
+    <div class="container">
       <div class="row">
         <div class="col-md-6 col-sm-12">
           <br/>
@@ -117,11 +117,14 @@
                 </div>
               </td>
               <td align="right">
-                <button id="play" type="button" class="btn btn-default btn-sm" style="display: none">
+                <button id="play" type="button" class="btn btn-default btn-sm" style="display: none; width: 75px">
                   <span class="glyphicon glyphicon-play" aria-hidden="true"></span> Play
                 </button>
-                <button id="stop" type="button" class="btn btn-danger btn-sm" style="display: none">
+                <button id="stop" type="button" class="btn btn-danger btn-sm" style="display: none; width: 75px">
                   <span class="glyphicon glyphicon-stop" aria-hidden="true"></span> Stop
+                </button>
+                <button id="load" type="button" class="btn btn-default btn-sm disabled" style="display: none; width: 75px">
+                  <span class="glyphicon glyphicon-time" aria-hidden="true"></span> Load
                 </button>
               </td>
             </tr>
@@ -166,6 +169,7 @@
     $(function() {
       var performance = [];
       var sliders = [12];
+      var timeout = -1;
 
       // draw empty chart
       var chart = new Chart(document.getElementById("myChart"), {
@@ -220,6 +224,7 @@
       var action = 'POST';
       $('#tridate').text(moment().format('MMMM Do YYYY'));
       if(hash) {
+        $('#load').show();
         action = 'PUT';
         $.ajax({
           url:"https://api.myjson.com/bins"+hash,
@@ -229,6 +234,7 @@
             if(performance.length > 0) {
               populate(performance.length-1);
             }
+            $('#load').hide();
             if(performance.length > 1) {
               $('#play').show();
             }
@@ -255,11 +261,12 @@
         $('#bar').css('width',~~(((item+1) / performance.length) * 100) + '%');
         populate(item);
         if(item < (performance.length-1)) {
-          setTimeout(function() { wayback(item+1) }, 1000)
+          timeout = setTimeout(function() { wayback(item+1) }, 1000)
         } else {
-          setTimeout(function() {
+          timeout = setTimeout(function() {
             $('#play').show();
             $('#stop').hide();
+            $('#save').prop('disabled', false);
           }, 1000);
         }
       };
@@ -274,23 +281,28 @@
       $('#play').on('click',function(event) {
         $('#play').hide();
         $('#stop').show();
+        $('#save').prop('disabled', true);
         wayback(0);
       });
 
       // function to stop history
       $('#stop').on('click',function(event) {
+        if(timeout > 0) {
+          clearTimeout(timeout);
+          timeout = -1;
+        }
+        populate(performance.length-1);
         $('#bar').css('width','0%');
         $('#stop').hide();
         $('#play').show();
-        // TODO: clear timeout
-        populate(performance.length-1);
+        $('#save').prop('disabled', false);
       });
 
       // function to save current data
       $('#save').on('click',function(event) {
         performance.push({
           date: moment().format('MMMM Do YYYY'),
-          data: chart.data.datasets[0].data
+          data: chart.data.datasets[0].data.slice()
         });
         $('#save').prop('disabled', true);
         $('#message').hide();
@@ -307,9 +319,9 @@
             window.location.hash = key;
             hash = '/'+key;
             action = 'PUT';
-            $('#message').html('Saved. Bookmark this page. Your data is here: <a target="_blank" href="https://api.myjson.com' + hash + '">https://api.myjson' + hash + '</a>');
+            $('#message').html('Saved. Bookmark this: <a target="_blank" href="' + window.location.href + '">' + window.location.href + '</a>');
           } else {
-            $('#message').html('Saved. <a target="_blank" href="https://api.myjson.com' + hash + '">https://api.myjson' + hash + '</a>');
+            $('#message').html('Saved. <a target="_blank" href="' + window.location.href + '">' + window.location.href + '</a>' );
           }
           $('#message').removeClass('text-danger');
           $('#message').addClass('text-success');
