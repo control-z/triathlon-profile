@@ -3,32 +3,11 @@
 <html lang="en">
   <head>
     <meta name="viewport" charset="utf-8" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"/>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/9.7.2/css/bootstrap-slider.min.css"/>
-    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/> -->
-    <link rel="stylesheet" href="https://bootswatch.com/united/bootstrap.min.css"/>
-    <link rel="stylesheet" href="https://bootswatch.com/assets/css/custom.min.css"/>
-    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"/> -->
-    <style>
-    .tooltip {
-      pointer-events: none;
-      -webkit-touch-callout: none; /* iOS Safari */
-        -webkit-user-select: none; /* Safari */
-         -khtml-user-select: none; /* Konqueror HTML */
-           -moz-user-select: none; /* Firefox */
-            -ms-user-select: none; /* Internet Explorer/Edge */
-                user-select: none; /* Non-prefixed version, currently supported by Chrome and Opera */
-    }
-    .slider-selection {
-      background: #BABABA;
-    }
-    .slider-handle {
-      background: #c34113
-    }
-    .tridate {
-      color: blue;
-    }
-    </style>
+    <link rel="stylesheet" href="./jquery-3.1.1/jquery-ui.css"/>
+    <link rel="stylesheet" href="./bootstrap-slider-9.7.2/bootstrap-slider.min.css"/>
+    <link rel="stylesheet" href="./bootstrap-3.3.7-dist/css/bootswatch-united-bootstrap.min.css"/>
+    <link rel="stylesheet" href="./bootstrap-3.3.7-dist/css/bootswatch-united-custom.min.css"/>
+    <link rel="stylesheet" href="./triathlon-profile.css"/>
     <title>Triathlon Profile</title>
   </head>
 
@@ -37,70 +16,18 @@
     <div class="navbar navbar-default navbar-fixed-top">
        <div class="container">
          <div class="navbar-header">
-           <span class="navbar-brand">TriProfile</span>
+           <a id="home" href="./"><span class="navbar-brand">TriProfile</span></a>
            <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-main">
              <span class="icon-bar"></span>
              <span class="icon-bar"></span>
              <span class="icon-bar"></span>
            </button>
          </div>
-         <!--
          <div class="navbar-collapse collapse" id="navbar-main">
-           <ul class="nav navbar-nav">
-             <li class="dropdown">
-               <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="themes">Themes <span class="caret"></span></a>
-               <ul class="dropdown-menu" aria-labelledby="themes">
-                 <li><a href="../default/">Default</a></li>
-                 <li class="divider"></li>
-                 <li><a href="../cerulean/">Cerulean</a></li>
-                 <li><a href="../cosmo/">Cosmo</a></li>
-                 <li><a href="../cyborg/">Cyborg</a></li>
-                 <li><a href="../darkly/">Darkly</a></li>
-                 <li><a href="../flatly/">Flatly</a></li>
-                 <li><a href="../journal/">Journal</a></li>
-                 <li><a href="../lumen/">Lumen</a></li>
-                 <li><a href="../paper/">Paper</a></li>
-                 <li><a href="../readable/">Readable</a></li>
-                 <li><a href="../sandstone/">Sandstone</a></li>
-                 <li><a href="../simplex/">Simplex</a></li>
-                 <li><a href="../slate/">Slate</a></li>
-                 <li><a href="../spacelab/">Spacelab</a></li>
-                 <li><a href="../superhero/">Superhero</a></li>
-                 <li><a href="../united/">United</a></li>
-                 <li><a href="../yeti/">Yeti</a></li>
-               </ul>
-             </li>
-             <li>
-               <a href="../help/">Help</a>
-             </li>
-             <li>
-               <a href="http://news.bootswatch.com">Blog</a>
-             </li>
-             <li class="dropdown">
-               <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="download">United <span class="caret"></span></a>
-               <ul class="dropdown-menu" aria-labelledby="download">
-                 <li><a href="http://jsfiddle.net/bootswatch/cvLkpsx0/">Open Sandbox</a></li>
-                 <li class="divider"></li>
-                 <li><a href="./bootstrap.min.css">bootstrap.min.css</a></li>
-                 <li><a href="./bootstrap.css">bootstrap.css</a></li>
-                 <li class="divider"></li>
-                 <li><a href="./variables.less">variables.less</a></li>
-                 <li><a href="./bootswatch.less">bootswatch.less</a></li>
-                 <li class="divider"></li>
-                 <li><a href="./_varstopes.scss">_variables.scss</a><Stop
-                 <li><a href="./_variables.scss">_variables.scss</a></li>
-                 <li><a href="./_bootswatch.scss">_bootswatch.scss</a></li>
-               </ul>
-             </li>
-           </ul>
-
            <ul class="nav navbar-nav navbar-right">
-             <li><a href="http://builtwithbootstrap.com/" target="_blank">Built With Bootstrap</a></li>
-             <li><a href="https://wrapbootstrap.com/?ref=bsw" target="_blank">WrapBootstrap</a></li>
+             <li><a id="about" href="./about.html">About</a></li>
            </ul>
-
          </div>
-       -->
        </div>
      </div>
 
@@ -158,193 +85,16 @@
       </div>
     </div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.bundle.js"></script>
-    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/9.7.2/bootstrap-slider.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <script src="moment-2.17.1.js"></script>
-
+    <script src="./chartjs-2.4.0/Chart.bundle.js"></script>
+    <script src="./jquery-3.1.1/jquery-3.1.1.min.js"></script>
+    <script src="./bootstrap-slider-9.7.2/bootstrap-slider.min.js"></script>
+    <script src="./tether-1.4.0/tether.min.js"></script>
+    <script src="./bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+    <script src="./moment-2.17.1/moment.js"></script>
+    <script src="./triathlon-profile.js"></script>
     <script>
-    $(function() {
-      var performance = [];
-      var sliders = [12];
-      var timeout = -1;
-
-      // draw empty chart
-      var chart = new Chart(document.getElementById("myChart"), {
-        type: 'radar',
-        options: {
-          pointDot : true,
-          responsive: true,
-          legend: {
-            display: false
-          },
-          aspectRatio: 1,
-          scale: {
-            pointLabels: {
-              fontFamily: "'Ubuntu',Tahoma,'Helvetica Neue',Helvetica,Arial,sans-serif",
-              fontSize: 14
-            },
-            ticks: {
-                max: 10,
-                min: 0,
-                stepSize: 2
-            }
-          }
-        },
-        data: {
-          labels: ["Technology", "Swim", "Bike", "Run", "Transition", "S&C", "Injuries", "Psychology", "Lifestyle", "Commitment", "Nutrition", "Physiology"],
-          datasets: [{
-            data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-            backgroundColor: "rgba(255,50,50,0.2)",
-            borderColor: "rgba(179,181,198,1)",
-            pointBackgroundColor: "rgba(179,181,198,1)",
-            pointBorderColor: "#fff",
-            pointHoverBackgroundColor: "#fff",
-            pointHoverBorderColor: "rgba(179,181,198,1)"
-          }]
-        }
-      });
-
-      // draw empty sliders
-      for(let i = 0; i < 12; i++) {
-        sliders[i] = $("#slider"+(i+1)).slider({
-          max:10,
-          value:0,
-          formatter: function(v) {
-            return chart.data.labels[i] + ': ' + v;
-          }
-        });
-        sliders[i].on('change', function(event) { chartval(i, event.value.newValue); });
-      }
-
-      // if url has hash component, use it to load data
-      var hash = window.location.hash ? window.location.hash.replace('#','/') : '';
-      var action = 'POST';
-      $('#tridate').text(moment().format('MMMM Do YYYY'));
-      if(hash) {
-        $('#load').show();
-        action = 'PUT';
-        $.ajax({
-          url:"https://api.myjson.com/bins"+hash,
-          type:"GET",
-          success: function(data, textStatus, jqXHR){
-            performance = data;
-            if(performance.length > 0) {
-              populate(performance.length-1);
-            }
-            $('#load').hide();
-            if(performance.length > 1) {
-              $('#play').show();
-            }
-          }
-        });
-      }
-
-      // function to populate radar chart & sliders
-      var populate = function(item) {
-        if(performance.length > 0 && performance[item].data) {
-          $('#tridate').text(performance[item].date);
-          var dataset = performance[item].data;
-          for(var i = 0; i < dataset.length; i++) {
-            chart.data.datasets[0].data[i] = dataset[i];
-            sliders[i].slider('setValue',dataset[i]);
-            sliders[i].slider('relayout');
-          }
-          chart.update();
-        }
-      };
-
-      // function to show dataset
-      var wayback = function(item) {
-        $('#bar').css('width',~~(((item+1) / performance.length) * 100) + '%');
-        populate(item);
-        if(item < (performance.length-1)) {
-          timeout = setTimeout(function() { wayback(item+1) }, 1000)
-        } else {
-          timeout = setTimeout(function() {
-            $('#play').show();
-            $('#stop').hide();
-            $('#save').prop('disabled', false);
-          }, 1000);
-        }
-      };
-
-      // function to set a particular chart value
-      var chartval = function(indexToUpdate, val) {
-        chart.data.datasets[0].data[indexToUpdate] = val;
-        chart.update();
-      };
-
-      // function to play history
-      $('#play').on('click',function(event) {
-        $('#play').hide();
-        $('#stop').show();
-        $('#save').prop('disabled', true);
-        wayback(0);
-      });
-
-      // function to stop history
-      $('#stop').on('click',function(event) {
-        if(timeout > 0) {
-          clearTimeout(timeout);
-          timeout = -1;
-        }
-        populate(performance.length-1);
-        $('#bar').css('width','0%');
-        $('#stop').hide();
-        $('#play').show();
-        $('#save').prop('disabled', false);
-      });
-
-      // function to save current data
-      $('#save').on('click',function(event) {
-        performance.push({
-          date: moment().format('MMMM Do YYYY'),
-          data: chart.data.datasets[0].data.slice()
-        });
-        $('#save').prop('disabled', true);
-        $('#message').hide();
-        $('#spinner').show().delay(2000);
-        $.ajax({
-          url:         "https://api.myjson.com/bins"+hash,
-          type:        action,
-          data:         JSON.stringify(performance),
-          contentType: "application/json; charset=utf-8",
-          dataType:    "json"
-        }).done(function(data, textStatus, jqXHR) {
-          if(data.uri) {
-            var key = data.uri.match(/\/bins\/(.*)/)[1];
-            window.location.hash = key;
-            hash = '/'+key;
-            action = 'PUT';
-            $('#message').html('Saved. Bookmark this: <a target="_blank" href="' + window.location.href + '">' + window.location.href + '</a>');
-          } else {
-            $('#message').html('Saved. <a target="_blank" href="' + window.location.href + '">' + window.location.href + '</a>' );
-          }
-          $('#message').removeClass('text-danger');
-          $('#message').addClass('text-success');
-          if(performance.length > 0) {
-            populate(performance.length-1);
-          }
-          if(performance.length > 1) {
-            $('#play').show();
-          }
-          $('#spinner').hide();
-          $('#message').fadeIn();
-        }).fail(function(jqXHR, textStatus, error) {
-          performance.pop();
-          $('#message').removeClass('text-success');
-          $('#message').addClass('text-danger');
-          $('#message').html('Error. Failed to save data. Please try again.');
-          $('#spinner').hide();
-          $('#message').show();
-        });
-        $('#save').prop('disabled', false);
-      });
-    });
-  </script>
+    load_home();
+    </script>
 
   </body>
 </html>

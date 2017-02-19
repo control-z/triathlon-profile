@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta name="viewport" charset="utf-8" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <link rel="stylesheet" href="./jquery-3.1.1/jquery-ui.css"/>
+    <link rel="stylesheet" href="./bootstrap-slider-9.7.2/bootstrap-slider.min.css"/>
+    <link rel="stylesheet" href="./bootstrap-3.3.7-dist/css/bootswatch-united-bootstrap.min.css"/>
+    <link rel="stylesheet" href="./bootstrap-3.3.7-dist/css/bootswatch-united-custom.min.css"/>
+    <link rel="stylesheet" href="./triathlon-profile.css"/>
+    <title>Triathlon Profile : About</title>
+  </head>
+
+  <body>
+
+    <div class="navbar navbar-default navbar-fixed-top">
+       <div class="container">
+         <div class="navbar-header">
+           <a id="home" href="./"><span class="navbar-brand">TriProfile</span></a>
+           <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-main">
+             <span class="icon-bar"></span>
+             <span class="icon-bar"></span>
+             <span class="icon-bar"></span>
+           </button>
+         </div>
+         <div class="navbar-collapse collapse" id="navbar-main">
+           <ul class="nav navbar-nav navbar-right">
+             <li><a id="about" href="./about.html">About</a></li>
+           </ul>
+         </div>
+       </div>
+     </div>
+
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12 col-sm-12">
+          <p>&nbsp;</p>
+          <p>
+            I've been reading the brilliant <a href="https://www.amazon.co.uk/d/Books/Triathlon-Training-Book-DK/0241229774/" target="_blank">Triathlon Training Book</a> by James Beckinsale.
+            James recommends regularly tracking your performance profile - strengths and weaknesses - using a radar chart. I couldn't find something out there that
+            would do this exactly how I wanted (and I don't need much of an excuse to code). So, this is the result.
+          </p>
+
+          <p>
+            Move the sliders to set your current performance levels and click <span style="color: orange">Save</span> to
+            generate a bookmark with a 5-letter code. Keep this bookmark - it refers to your data. Revisit this site, using your bookmark, and update and save your performance levels as
+            you improve. Once you have a couple of saves, you can click <span style="color: grey">Play</span> and watch your progress.
+          </p>
+
+          <p>
+            I've since found out that James offers a tracker spreadsheet for free if you sign up to his newsletter (see:
+            <a href="http://www.jamesbeckinsale.co.uk/performance-profiling/" target="_blank">http://www.jamesbeckinsale.co.uk/performance-profiling/</a>).
+          </p>
+
+          <p style="font-size: smaller">
+            <span style="color: red">Warning:</span> <b>myjson.com</b> is in beta - it seems pretty reliable to me but, if you want, you can backup your
+            data by visiting <span style="color: blue">http://myjson.com/&lt;bookmark&gt;</span> where &lt;bookmark&gt; is your 5-letter code.
+          </p>
+
+        </div>
+      </div>
+      </div>
+    </div>
+
+    <script src="./chartjs-2.4.0/Chart.bundle.js"></script>
+    <script src="./jquery-3.1.1/jquery-3.1.1.min.js"></script>
+    <script src="./bootstrap-slider-9.7.2/bootstrap-slider.min.js"></script>
+    <script src="./tether-1.4.0/tether.min.js"></script>
+    <script src="./bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+    <script src="./moment-2.17.1/moment.js"></script>
+    <script src="./triathlon-profile.js"></script>
+    <script>
+    load_about();
+    </script>
+
+  </body>
+</html>
