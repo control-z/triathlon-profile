@@ -4,223 +4,97 @@
   <head>
     <meta name="viewport" charset="utf-8" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <link rel="stylesheet" href="./jquery-3.1.1/jquery-ui.css"/>
-    <link rel="stylesheet" href="./bootstrap-3.3.7-dist/css/bootswatch-sandstone-bootstrap.min.css"/>
+    <link rel="stylesheet" href="./bootstrap-slider-9.7.2/bootstrap-slider.min.css"/>
+    <link rel="stylesheet" href="./bootstrap-3.3.7-dist/css/bootswatch-united-bootstrap.min.css"/>
     <link rel="stylesheet" href="./bootstrap-3.3.7-dist/css/bootswatch-united-custom.min.css"/>
-    <!-- <link rel="stylesheet" href="./triathlon-profile.css"/> -->
-    <style>
-    .marble {
-      cursor: pointer;
-      width: 48px;
-      height: 48px;
-      background-image: url('marble.jpg');
-      background-size: 48px 48px;
-    }
-    .marbleselected {
-      cursor: pointer;
-      width: 48px;
-      height: 48px;
-      background-image: url('marbleselected.jpg');
-      background-size: 48px 48px;
-    }
-    .marbleless {
-      cursor: pointer;
-      width: 48px;
-      height: 48px;
-      background-image: url('marbleless.jpg');
-      background-size: 48px 48px;
-    }
-    .nomarble {
-      width: 48px;
-      height: 48px;
-      background-size: 48px 48px;
-    }
-    </style>
-    <title>Peg Solitaire</title>
+    <link rel="stylesheet" href="./triathlon-profile.css"/>
+    <title>Triathlon Profile</title>
   </head>
 
   <body>
 
     <div class="navbar navbar-default navbar-fixed-top">
-      <div class="container">
-        <div class="navbar-header">
-          <a id="home" href="./"><span class="navbar-brand">Solitaire</span></a>
-          <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-main">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-        </div>
-        <div class="navbar-collapse collapse" id="navbar-main">
-          <ul class="nav navbar-nav navbar-right">
-            <li><a id="about" href="./about.html">About</a></li>
-          </ul>
-        </div>
-      </div>
-    </div>
+       <div class="container">
+         <div class="navbar-header">
+           <a id="home" href="./"><span class="navbar-brand">TriProfile</span></a>
+           <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-main">
+             <span class="icon-bar"></span>
+             <span class="icon-bar"></span>
+             <span class="icon-bar"></span>
+           </button>
+         </div>
+         <div class="navbar-collapse collapse" id="navbar-main">
+           <ul class="nav navbar-nav navbar-right">
+             <li><a id="about" href="./about.html">About</a></li>
+           </ul>
+         </div>
+       </div>
+     </div>
 
     <div class="container">
       <div class="row">
-      <div class="col-md-4">
+        <div class="col-md-6 col-sm-12">
+          <br/>
+          <table border="0" cellpadding="0" cellspacing="0" width="100%">
+            <tr>
+              <td>
+                Date: <span class="tridate" id="tridate"></span>
+                <div id="progress" class="progress" style="height: 10px">
+                  <div id="bar" class="progress-bar progress-bar-warning" role="progressbar" style="width: 0%; height: 10px"/>
+                </div>
+              </td>
+              <td align="right">
+                <button id="play" type="button" class="btn btn-default btn-sm" style="display: none; width: 75px">
+                  <span class="glyphicon glyphicon-play" aria-hidden="true"></span> Play
+                </button>
+                <button id="stop" type="button" class="btn btn-danger btn-sm" style="display: none; width: 75px">
+                  <span class="glyphicon glyphicon-stop" aria-hidden="true"></span> Stop
+                </button>
+                <button id="load" type="button" class="btn btn-default btn-sm disabled" style="display: none; width: 75px">
+                  <span class="glyphicon glyphicon-time" aria-hidden="true"></span> Load
+                </button>
+              </td>
+            </tr>
+          </table>
+        </div>
       </div>
-      <div class="col-md-8">
-        <table style="margin-top: 48px">
-        <tr>
-          <td id="o00" class="nomarble"></td>
-          <td id="o01" class="nomarble"></td>
-          <td id="o02" class="marble"></td>
-          <td id="o03" class="marble"></td>
-          <td id="o04" class="marble"></td>
-          <td id="o05" class="nomarble"></td>
-          <td id="o06" class="nomarble"></td>
-        </tr>
-        <tr>
-          <td id="o10" class="nomarble"></td>
-          <td id="o11" class="nomarble"></td>
-          <td id="o12" class="marble"></td>
-          <td id="o13" class="marble"></td>
-          <td id="o14" class="marble"></td>
-          <td id="o15" class="nomarble"></td>
-          <td id="o16" class="nomarble"></td>
-        </tr>
-        <tr>
-          <td id="o20" class="marble"></td>
-          <td id="o21" class="marble"></td>
-          <td id="o22" class="marble"></td>
-          <td id="o23" class="marble"></td>
-          <td id="o24" class="marble"></td>
-          <td id="o25" class="marble"></td>
-          <td id="o26" class="marble"></td>
-        </tr>
-        <tr>
-          <td id="o30" class="marble"></td>
-          <td id="o31" class="marble"></td>
-          <td id="o32" class="marble"></td>
-          <td id="o33" class="marbleless"></td>
-          <td id="o34" class="marble"></td>
-          <td id="o35" class="marble"></td>
-          <td id="o36" class="marble"></td>
-        </tr>
-        <tr>
-          <td id="o40" class="marble"></td>
-          <td id="o41" class="marble"></td>
-          <td id="o42" class="marble"></td>
-          <td id="o43" class="marble"></td>
-          <td id="o44" class="marble"></td>
-          <td id="o45" class="marble"></td>
-          <td id="o46" class="marble"></td>
-        </tr>
-        <tr>
-          <td id="o50" class="nomarble"></td>
-          <td id="o51" class="nomarble"></td>
-          <td id="o52" class="marble"></td>
-          <td id="o53" class="marble"></td>
-          <td id="o54" class="marble"></td>
-          <td id="o55" class="nomarble"></td>
-          <td id="o56" class="nomarble"></td>
-        </tr>
-        <tr>
-          <td id="o60" class="nomarble"></td>
-          <td id="o61" class="nomarble"></td>
-          <td id="o62" class="marble"></td>
-          <td id="o63" class="marble"></td>
-          <td id="o64" class="marble"></td>
-          <td id="o65" class="nomarble"></td>
-          <td id="o66" class="nomarble"></td>
-        </tr>
-        </table>
-      </div>
+      <div class="row">
+        <div class="col-md-6 col-sm-12">
+          <canvas id="myChart" width="400" height="400"></canvas>
+        </div>
+        <div class="col-md-6 col-sm-12">
+          <table class="table" border="0">
+            <tr><td>Technology</td><td><input id="slider1"></input></td></tr>
+            <tr><td>Swim</td><td><input id="slider2"></input></td></tr>
+            <tr><td>Bike</td><td><input id="slider3"></input></td></tr>
+            <tr><td>Run</td><td><input id="slider4"></input></td></tr>
+            <tr><td>Transition</td><td><input id="slider5"></input></td></tr>
+            <tr><td>S&amp;C</td><td><input id="slider6"></input></td></tr>
+            <tr><td>Injuries</td><td><input id="slider7"></input></td></tr>
+            <tr><td>Psychology</td><td><input id="slider8"></input></td></tr>
+            <tr><td>Lifestyle</td><td><input id="slider9"></input></td></tr>
+            <tr><td>Commitment</td><td><input id="slider10"></input></td></tr>
+            <tr><td>Nutrition</td><td><input id="slider11"></input></td></tr>
+            <tr><td>Physiology</td><td><input id="slider12"></input></td></tr>
+          </table>
+          <p id="spinner" style="display: none"><img border="0" src="loading.gif"/></p>
+          <p id="message" style="display: none"></p>
+          <button class="btn btn-primary" id="save">Save</button>
+          <p>&nbsp;</p>
+        </div>
       </div>
     </div>
 
+    <script src="./chartjs-2.4.0/Chart.bundle.js"></script>
     <script src="./jquery-3.1.1/jquery-3.1.1.min.js"></script>
     <script src="./bootstrap-slider-9.7.2/bootstrap-slider.min.js"></script>
     <script src="./tether-1.4.0/tether.min.js"></script>
     <script src="./bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
     <script src="./moment-2.17.1/moment.js"></script>
+    <script src="./triathlon-profile.js"></script>
     <script>
-    $(function() {
-      var board = [
-        [-1, -1, 1, 1, 1, -1, -1],
-        [-1, -1, 1, 1, 1, -1, -1],
-        [ 1,  1, 1, 1, 1,  1 , 1],
-        [ 1,  1, 1, 0, 1,  1 , 1],
-        [ 1,  1, 1, 1, 1,  1 , 1],
-        [-1, -1, 1, 1, 1, -1, -1],
-        [-1, -1, 1, 1, 1, -1, -1]
-      ];
-
-      var selected = '';
-      $("[id^='o']").on('click', function(event) {
-        if(selected && $(this).hasClass('marbleless')) {
-          jump(selected, this.id);
-        } else {
-          if(selected && selected != this.id) {
-            toggle($("#" + selected));
-          }
-          toggle($(this));
-        }
-      });
-
-      var draw = function() {
-        for(var row = 0; row < board.length; row++) {
-          for(var col = 0; col < board[row].length; col++) {
-            var id = '#o' + row + col;
-            $(id).removeClass('marbleselected');
-            if(board[row][col] == 0) {
-              if(!$(id).hasClass('marbleless')) {
-                $(id).addClass('marbleless');
-                $(id).removeClass('marble');
-              }
-            } else if(board[row][col] == 1) {
-              if(!$(id).hasClass('marble')) {
-                $(id).addClass('marble');
-                $(id).removeClass('marbleless');
-              }
-            }
-          }
-        }
-      };
-
-      var jump = function(from, to) {
-        var from_row = parseInt(from[1]);
-        var from_col = parseInt(from[2]);
-        var to_row = parseInt(to[1]);
-        var to_col = parseInt(to[2]);
-        if(valid(from_row, from_col, to_row, to_col)) {
-          move(from_row, from_col, to_row, to_col);
-        }
-        selected = '';
-        draw();
-      };
-
-      var toggle = function(marble) {
-        if(marble.hasClass('marble')) {
-          marble.addClass('marbleselected');
-          marble.removeClass('marble');
-          selected = marble.attr('id');
-        } else if(marble.hasClass('marbleselected')) {
-          marble.addClass('marble');
-          marble.removeClass('marbleselected');
-          selected = '';
-        }
-      }
-
-      var valid = function(from_row, from_col, to_row, to_col) {
-        return((from_col == to_col && (Math.abs(to_row-from_row)==2) ||
-            from_row == to_row && (Math.abs(to_col-from_col)==2)) &&
-            board[from_row+((to_row-from_row)/2)][from_col+((to_col-from_col)/2)]==1 &&
-            board[from_row][from_col]==1 &&
-            board[to_row][to_col]==0);
-      };
-
-      var move = function(from_row, from_col, to_row, to_col) {
-        if(valid(from_row, from_col, to_row, to_col)) {
-          board[from_row][from_col]=0 
-          board[from_row+((to_row-from_row)/2)][from_col+((to_col-from_col)/2)]=0
-          board[to_row][to_col]=1
-        }
-      };
-    });
+    load_home();
     </script>
+
   </body>
 </html>
