@@ -1,7 +1,7 @@
 Triathlon Profile
 =================
 
-Check it out here: https://coderrik.github.io/triathlon-profile/.
+Check it out here: https://control-z.github.io/triathlon-profile/.
 
 ![Screenshot](triathlon-profile-screenshot.png)
 
